@@ -1,0 +1,115 @@
+{
+  "name": "pets-backend-v2",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint './**/*.ts' --ignore-pattern '**/*.d.ts' --quiet",
+    "lint-fix": "eslint '**/*.ts' --ignore-pattern '**/*.d.ts' --fix",
+    "build-src": "wireit",
+    "cdk-diff": "wireit",
+    "cdk-deploy": "wireit",
+    "cdk-hotswap": "wireit",
+    "start-local-api": "wireit",
+    "start-local-api-watch": "npm-watch start-local-api",
+    "build-api-package": "wireit",
+    "publish-api-package": "wireit",
+    "test-unit": "vitest",
+    "test-e2e": "TEST_TYPE=E2E vitest"
+  },
+  "watch": {
+    "start-local-api": {
+      "patterns": [
+        "scripts",
+        "config",
+        "src"
+      ],
+      "extensions": "ts"
+    }
+  },
+  "wireit": {
+    "cdk-hotswap": {
+      "command": "esr ./scripts/index.ts -c cdk-hotswap",
+      "dependencies": [
+        "build-src"
+      ]
+    },
+    "cdk-deploy": {
+      "command": "esr ./scripts/index.ts -c cdk-deploy",
+      "dependencies": [
+        "build-src"
+      ]
+    },
+    "cdk-diff": {
+      "command": "esr ./scripts/index.ts -c cdk-diff",
+      "dependencies": [
+        "build-src"
+      ]
+    },
+    "build-src": {
+      "command": "esr ./scripts/index.ts -c build-src",
+      "files": [
+        "scripts/index.ts",
+        "src/backend/**/*.ts"
+      ],
+      "output": [
+        "dist/backend/**"
+      ]
+    },
+    "start-local-api": {
+      "command": "esr ./scripts/index.ts -c start-local-api"
+    },
+    "build-api-package": {
+      "command": "esr ./scripts/index.ts -c build-api-package"
+    },
+    "publish-api-package": {
+      "command": "esr ./scripts/index.ts -c publish-api-package"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@trpc/client": "^10.37.1",
+    "@trpc/server": "^10.37.1",
+    "@types/aws-lambda": "^8.10.119",
+    "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/fs-extra": "^11.0.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/lodash": "^4.14.197",
+    "@types/node": "^20.4.9",
+    "@types/semver": "^7.5.0",
+    "@types/yargs": "^17.0.24",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.3.0",
+    "aws-cdk": "2.91.0",
+    "aws-cdk-lib": "2.91.0",
+    "axios": "^1.4.0",
+    "constructs": "^10.2.69",
+    "cors": "^2.8.5",
+    "esbuild": "^0.19.0",
+    "esbuild-runner": "^2.2.2",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "execa": "5",
+    "express": "^4.18.2",
+    "fs-extra": "^11.1.1",
+    "husky": "^8.0.3",
+    "kill-port-process": "^3.1.0",
+    "npm-watch": "^0.11.0",
+    "semver": "^7.5.4",
+    "swagger-typescript-api": "^13.0.3",
+    "trpc-openapi": "^1.2.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6",
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.34.1",
+    "wireit": "^0.10.0",
+    "yargs": "^17.7.2",
+    "zod": "^3.21.4"
+  }
+}
