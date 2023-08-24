@@ -11,7 +11,7 @@ It features the following:
 - Tests setup for both unit and e2e
 - Local development by creating an express server from the tRPC lambda code
 - Other:
-  - Not using `tsc` or `ts-node` but Vite, esbuild and the `esbuild-runner` package instead.
+  - Uses esbuild and the `esbuild-runner` package instead of `tsc` or `ts-node`
   - Vitest is being used for tests
   - Has ESLint + Prettier setup
   - It has API endpoints to get all pets, a single pet and to create a pet. It also has an endpoint to show the OpenAPI
