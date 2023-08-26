@@ -5,7 +5,7 @@ import { createOpenApiAwsLambdaHandler, generateOpenApiDocument } from 'trpc-ope
 import { OpenAPIV3 } from 'openapi-types';
 import { TRPCError } from '@trpc/server';
 import assert from 'assert';
-import { removeCloudFrontProxyPath, TRPCHandlerError } from '@backend/lambda/api/lib/utils/api_utils';
+import { TRPCHandlerError } from '@backend/lambda/api/lib/utils/api_utils';
 import { getEnv } from '@backend/lambda/api/environment';
 import * as console from 'console';
 
@@ -55,10 +55,7 @@ function docsRoute(): APIGatewayProxyResult {
 
 export const handler = async (event: APIGatewayProxyEventV2, context: Context): Promise<APIGatewayProxyResult> => {
   const ENVIRONMENT = getEnv();
-
   console.debug('EVENT', event);
-
-  event = removeCloudFrontProxyPath(event, '/api-ingest');
 
   let response: APIGatewayProxyResult | undefined;
   let trpcLastError: TRPCHandlerError | undefined;
@@ -68,7 +65,6 @@ export const handler = async (event: APIGatewayProxyEventV2, context: Context): 
       response = docsRoute();
     } else {
       /* Do any rewrites here if you wish before passing to tRPC */
-
       const trpcOpenApiHandler = createOpenApiAwsLambdaHandler({
         router: appRouter,
         createContext: ({ event }: CreateAWSLambdaContextOptions<APIGatewayProxyEventV2>) => {
@@ -116,6 +112,5 @@ export const handler = async (event: APIGatewayProxyEventV2, context: Context): 
   }
 
   console.debug('RESPONSE', response);
-
   return response;
 };

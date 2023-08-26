@@ -10,14 +10,15 @@ export type TRPCHandlerError = {
   ctx: object | undefined;
 };
 
-export function removeCloudFrontProxyPath(event: APIGatewayProxyEventV2, path: string) {
-  if (event.rawPath.startsWith(path)) {
-    event.rawPath = event.rawPath.replace(path, '');
-    event.requestContext.http.path = event.requestContext.http.path.replace(path, '');
-  }
-
-  return event;
-}
+// USAGE: event = removeCloudFrontProxyPath(event, '/api');
+// export function removeCloudFrontProxyPath(event: APIGatewayProxyEventV2, path: string) {
+//   if (event.rawPath.startsWith(path)) {
+//     event.rawPath = event.rawPath.replace(path, '');
+//     event.requestContext.http.path = event.requestContext.http.path.replace(path, '');
+//   }
+//
+//   return event;
+// }
 
 /* For manual CORS within the Lambda, not used in this example */
 // export function validateAndGetCorsOrigin(origin: string, allowedOrigins: string[]) {
