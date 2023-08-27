@@ -1,5 +1,7 @@
 # Backend
 
+> This repo is part of this blog: [https://blog.cloudglance.dev/trpc-separate-backend-frontend-with-openapi-aws-lambda-cdk/index.html](https://blog.cloudglance.dev/trpc-separate-backend-frontend-with-openapi-aws-lambda-cdk/index.html)
+
 This project consists of a single API Lambda function deployed to AWS that can be accessed using the Function URL(FURL).
 The AWS CDK has been used to define the IaC and the Lambda is written in TS.
 
